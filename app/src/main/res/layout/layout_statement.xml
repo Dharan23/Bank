@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="statement"
+            type="com.application.bank.data.network.response.Statement" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:shadowColor="@color/shimmerColor"
+        android:shadowDx="20"
+        android:shadowDy="100"
+        android:shadowRadius="60">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/statement_card"
+            style="@style/cardStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_10dp">
+
+                    <TextView
+                        android:id="@+id/payment_type_head"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{statement.title}"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="20sp"
+                        tools:text="@string/payment" />
+
+                    <TextView
+                        android:id="@+id/payment_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{statement.date}"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="17sp"
+                        tools:text="12/10/2019" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/padding_10dp"
+                    android:paddingLeft="@dimen/padding_10dp"
+                    android:paddingTop="@dimen/padding_12dp"
+                    android:paddingEnd="@dimen/padding_10dp"
+                    android:paddingBottom="@dimen/padding_10dp">
+
+                    <TextView
+                        android:id="@+id/payment_type_value"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{statement.desc}"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="20sp"
+                        tools:text="Conta de luz" />
+
+                    <TextView
+                        android:id="@+id/payment_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{`R$ ` + String.valueOf(statement.value)}"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="22sp"
+                        tools:text="R$ 1.000,00" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>

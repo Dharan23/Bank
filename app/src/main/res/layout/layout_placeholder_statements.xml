@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/statement_card"
+    style="@style/cardStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_padding_20dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_padding_20dp"
+            android:background="@color/shimmerColor" />
+
+        <View
+            android:layout_width="200dp"
+            android:layout_height="@dimen/dimen_padding_20dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:background="@color/shimmerColor" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

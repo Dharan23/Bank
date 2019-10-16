@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#4451f0</color>
+    <color name="colorAccent">#3F51B5</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="lightGrey">#e3e8f1</color>
+    <color name="blue">#4451f0</color>
+    <color name="placeholder_blue">#717BEE</color>
+
+    <color name="disableColor">#804451F0</color>
+    <color name="secondaryTextColor">#bdc7d3</color>
+    <color name="primaryTextColor">#525f70</color>
+
+    <color name="shimmerColor">#EBEAEA</color>
+</resources>

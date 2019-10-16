@@ -1,0 +1,43 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="placeholder_blue" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_marginStart" tools:targetApi="jelly_bean_mr1">
+            @dimen/padding_16dp
+        </item>
+        <item name="android:layout_marginTop">@dimen/dimen_10dp</item>
+        <item name="android:layout_marginEnd" tools:targetApi="jelly_bean_mr1">@dimen/padding_16dp
+        </item>
+        <item name="android:layout_marginBottom">@dimen/dimen_10dp</item>
+        <item name="android:background">@color/placeholder_blue</item>
+    </style>
+
+    <style name="cardStyle" parent="CardView">
+        <item name="cardCornerRadius">@dimen/dimen_8dp</item>
+        <item name="cardElevation">@dimen/dimen_5dp</item>
+        <item name="android:layout_marginStart">@dimen/dimen_left_margin</item>
+        <item name="android:layout_marginLeft">@dimen/dimen_left_margin</item>
+        <item name="android:layout_marginEnd">@dimen/dimen_right_margin</item>
+        <item name="android:layout_marginRight">@dimen/dimen_right_margin</item>
+        <item name="android:layout_marginTop">@dimen/dimen_10dp</item>
+        <item name="android:layout_marginBottom">@dimen/dimen_10dp</item>
+        <item name="cardUseCompatPadding">false</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:dividerHeight">0.0px</item>
+        <item name="android:elevation" tools:targetApi="lollipop">@dimen/dimen_8dp</item>
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:clipChildren">false</item>
+    </style>
+
+</resources>

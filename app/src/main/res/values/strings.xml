@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Bank</string>
+    <string name="user_hint">User</string>
+    <string name="logo_desc">Logo</string>
+    <string name="password_hint">Password</string>
+    <string name="login">Login</string>
+
+    <string name="login_failed">Login Failed. Try again..</string>
+    <string name="no_internet">No Internet Connection</string>
+    <string name="account_text">Conta</string>
+    <string name="balance_text">Saldo</string>
+    <string name="recent">Recentes</string>
+    <string name="payment">Pagamento</string>
+    <string name="logout">Logout</string>
+</resources>
