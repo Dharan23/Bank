@@ -7,6 +7,14 @@ import java.util.regex.Pattern
 
 object Commons {
 
+    fun isEmailEmpty(email: String): Boolean {
+        return email.isEmpty()
+    }
+
+    fun isPasswordEmpty(password: String): Boolean {
+        return password.isEmpty()
+    }
+
     fun isEmailValid(email: String): Boolean {
         return email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }

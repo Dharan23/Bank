@@ -80,4 +80,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
     override fun loginError() {
         login_btn.showSnackBar(getString(R.string.login_failed))
     }
+
+    override fun setUsernameError(message: String) {
+        username.error = message
+    }
+
+    override fun setPasswordError(message: String) {
+        password.error = message
+    }
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.application.bank.data.network.api.MainApiService
 import com.application.bank.data.network.response.StatementList
+import com.application.bank.util.EspressoIdlingResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -16,10 +17,13 @@ class StatementRepositoryImpl(
         get() = _statementLiveData
 
     override suspend fun getAllStatements(id: Int): LiveData<StatementList> {
+
         return withContext(Dispatchers.IO) {
+            EspressoIdlingResource.increment()
             apiService.getAllStatements(id).await().also {
                 _statementLiveData.postValue(it)
             }
+            EspressoIdlingResource.decrement()
             return@withContext statementLiveData
         }
     }

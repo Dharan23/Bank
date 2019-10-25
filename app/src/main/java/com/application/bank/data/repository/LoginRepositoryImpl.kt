@@ -7,6 +7,7 @@ import com.application.bank.data.network.dao.UserDao
 import com.application.bank.data.network.model.Login
 import com.application.bank.data.network.response.LoginResponse
 import com.application.bank.data.network.response.UserAccount
+import com.application.bank.util.EspressoIdlingResource
 import com.application.bank.util.NoConnectivityException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -25,11 +26,13 @@ class LoginRepositoryImpl(
     override suspend fun loginUser(login: Login): LiveData<LoginResponse> {
         try {
             return withContext(Dispatchers.IO) {
+                EspressoIdlingResource.countingIdlingResource.increment()
                 val response = loginApiService.login(login.user, login.password).await()
                 if (response.error.code == 0) {
                     persistUserData(response.userAccount)
                 }
                 _loginResponse.postValue(response)
+                EspressoIdlingResource.countingIdlingResource.decrement()
                 return@withContext loginResponse
             }
         } catch (e: NoConnectivityException) {

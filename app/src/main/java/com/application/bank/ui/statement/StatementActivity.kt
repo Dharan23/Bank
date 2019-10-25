@@ -4,31 +4,27 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.test.espresso.idling.CountingIdlingResource
 import com.application.bank.BR
 import com.application.bank.R
 import com.application.bank.databinding.ActivityStatementBinding
 import com.application.bank.ui.base.BaseActivity
-import com.application.bank.ui.login.LoginActivity
 import com.application.bank.ui.login.LoginActivity.Companion.loginInit
 import com.application.bank.ui.statement.adapter.StatementAdapter
 import com.application.bank.util.NoConnectivityException
 import com.application.bank.util.setLightNavigationBar
-import com.application.bank.util.showToastShort
 import kotlinx.android.synthetic.main.activity_statement.*
 import kotlinx.coroutines.launch
-import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
 
 class StatementActivity : BaseActivity<ActivityStatementBinding, StatementViewModel>(),
     KodeinAware, StatementNavigator {
+
     override val kodein by closestKodein()
     private val factory: StatementViewModelFactory by instance()
 

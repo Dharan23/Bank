@@ -22,10 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.login.LoginActivity" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.statement.StatementActivity"
             android:parentActivityName=".ui.login.LoginActivity"
+            android:screenOrientation="portrait"
             tools:targetApi="jelly_bean" />
     </application>
 

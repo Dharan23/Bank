@@ -5,6 +5,8 @@
     <string name="password_hint">Password</string>
     <string name="login">Login</string>
 
+    <string name="username_password_incorrect">Usuário ou senha incorreta</string>
+    <string name="username_incorrect">Usuário incorreta</string>
     <string name="login_failed">Login Failed. Try again..</string>
     <string name="no_internet">No Internet Connection</string>
     <string name="account_text">Conta</string>
