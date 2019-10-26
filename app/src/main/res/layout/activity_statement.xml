@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -15,154 +16,299 @@
             type="com.application.bank.data.network.response.UserAccount" />
     </data>
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/account_section"
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/blue"
+            android:fontFamily="sans-serif-light"
+            android:padding="@dimen/dimen_padding_20dp"
+            android:text="@{user.name}"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:targetApi="jelly_bean"
+            tools:text="Baranidharan M" />
+
+        <TextView
+            android:id="@+id/account_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blue"
-            android:orientation="vertical">
+            android:fontFamily="sans-serif-light"
+            android:paddingStart="20dp"
+            android:paddingTop="@dimen/padding_12dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="@dimen/padding_12dp"
+            android:text="@string/account_text"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:targetApi="jelly_bean" />
 
-            <LinearLayout
+        <TextView
+            android:id="@+id/account_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:fontFamily="sans-serif-light"
+            android:paddingStart="@dimen/dimen_padding_20dp"
+            android:paddingTop="@dimen/dimen_8dp"
+            android:paddingEnd="@dimen/dimen_padding_20dp"
+            android:paddingBottom="@dimen/dimen_8dp"
+            android:text="@{user.bankAccount + ` / ` + user.agency}"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:visibility="@{user.bankAccount != null ? View.VISIBLE: View.GONE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/account_text"
+            tools:targetApi="jelly_bean"
+            tools:text="2050 / 0123456789" />
+
+        <TextView
+            android:id="@+id/balance_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:fontFamily="sans-serif-light"
+            android:paddingStart="@dimen/dimen_padding_20dp"
+            android:paddingTop="@dimen/padding_12dp"
+            android:paddingEnd="@dimen/dimen_padding_20dp"
+            android:paddingBottom="@dimen/padding_12dp"
+            android:text="@string/balance_text"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/account_details"
+            tools:targetApi="jelly_bean" />
+
+        <TextView
+            android:id="@+id/balance_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:fontFamily="sans-serif-light"
+            android:paddingStart="@dimen/dimen_padding_20dp"
+            android:paddingTop="@dimen/dimen_8dp"
+            android:paddingEnd="@dimen/dimen_padding_20dp"
+            android:paddingBottom="@dimen/padding_12dp"
+            android:text="@{`R$ ` + String.valueOf(user.balance)}"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/balance_text"
+            tools:targetApi="jelly_bean"
+            tools:text="RS 1.000,00" />
+
+        <ImageView
+            android:id="@+id/iv_logout"
+            android:layout_width="@dimen/dimen_padding_20dp"
+            android:layout_height="@dimen/dimen_padding_20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="32dp"
+            android:background="?actionBarItemBackground"
+            android:clickable="true"
+            android:contentDescription="@string/logout"
+            android:focusable="true"
+            android:onClick="@{()->viewModel.logOut()}"
+            android:scaleType="centerInside"
+            android:src="@drawable/logout"
+            app:layout_constraintBottom_toBottomOf="@+id/name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="@{user.name == null ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/recent_section"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include
+                layout="@layout/layout_placeholder_account"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="@dimen/dimen_padding_20dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-light"
-                    android:text="@{user.name}"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    tools:targetApi="jelly_bean"
-                    tools:text="Baranidharan M" />
-
-                <ImageView
-                    android:id="@+id/iv_logout"
-                    android:layout_width="@dimen/dimen_padding_20dp"
-                    android:layout_height="@dimen/dimen_padding_20dp"
-                    android:background="?actionBarItemBackground"
-                    android:clickable="true"
-                    android:contentDescription="@string/logout"
-                    android:focusable="true"
-                    android:onClick="@{()->viewModel.logOut()}"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/logout" />
-
-            </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="@{user.name == null ? View.VISIBLE : View.GONE }">
-
-                <include layout="@layout/layout_placeholder_account" />
-            </FrameLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="@{user.name == null ? View.GONE : View.VISIBLE }">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/account_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:padding="@dimen/padding_5dp"
-                        android:paddingStart="@dimen/dimen_padding_20dp"
-                        android:paddingLeft="@dimen/dimen_padding_20dp"
-                        android:paddingEnd="@dimen/dimen_padding_20dp"
-                        android:text="@string/account_text"
-                        android:textColor="@color/white"
-                        android:textSize="17sp"
-                        tools:targetApi="jelly_bean" />
-
-                    <TextView
-                        android:id="@+id/account_details"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:paddingStart="@dimen/dimen_padding_20dp"
-                        android:paddingLeft="@dimen/dimen_padding_20dp"
-                        android:paddingEnd="@dimen/dimen_padding_20dp"
-                        android:text="@{user.bankAccount + ` / ` + user.agency}"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:visibility="@{user.bankAccount != null ? View.VISIBLE: View.GONE}"
-                        tools:targetApi="jelly_bean"
-                        tools:text="2050 / 0123456789" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="@dimen/dimen_padding_20dp"
-                    android:paddingBottom="@dimen/dimen_padding_20dp">
-
-                    <TextView
-                        android:id="@+id/balance_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:padding="@dimen/padding_5dp"
-                        android:paddingStart="@dimen/dimen_padding_20dp"
-                        android:paddingLeft="@dimen/dimen_padding_20dp"
-                        android:paddingEnd="@dimen/dimen_padding_20dp"
-                        android:text="@string/balance_text"
-                        android:textColor="@color/white"
-                        android:textSize="17sp"
-                        tools:targetApi="jelly_bean" />
-
-                    <TextView
-                        android:id="@+id/balance_value"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:paddingStart="@dimen/dimen_padding_20dp"
-                        android:paddingLeft="@dimen/dimen_padding_20dp"
-                        android:paddingEnd="@dimen/dimen_padding_20dp"
-                        android:text="@{`R$ ` + String.valueOf(user.balance)}"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        tools:targetApi="jelly_bean"
-                        tools:text="RS 1.000,00" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
+                android:layout_height="match_parent" />
+        </FrameLayout>
 
         <TextView
             android:id="@+id/recent_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/account_section"
             android:paddingStart="@dimen/dimen_padding_20dp"
             android:paddingLeft="@dimen/dimen_padding_20dp"
             android:paddingTop="@dimen/padding_10dp"
             android:paddingEnd="@dimen/dimen_padding_20dp"
             android:paddingBottom="@dimen/padding_10dp"
             android:text="@string/recent"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/balance_value" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/statement_rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/recent_section" />
-    </RelativeLayout>
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recent_section"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/account_section"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@color/blue"-->
+        <!--            android:orientation="vertical">-->
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:gravity="center_vertical"-->
+        <!--                android:orientation="horizontal"-->
+        <!--                android:padding="@dimen/dimen_padding_20dp">-->
+
+        <!--                <TextView-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_weight="1"-->
+        <!--                    android:fontFamily="sans-serif-light"-->
+        <!--                    android:text="@{user.name}"-->
+        <!--                    android:textColor="@color/white"-->
+        <!--                    android:textSize="24sp"-->
+        <!--                    tools:targetApi="jelly_bean"-->
+        <!--                    tools:text="Baranidharan M" />-->
+
+        <!--                <ImageView-->
+        <!--                    android:id="@+id/iv_logout"-->
+        <!--                    android:layout_width="@dimen/dimen_padding_20dp"-->
+        <!--                    android:layout_height="@dimen/dimen_padding_20dp"-->
+        <!--                    android:background="?actionBarItemBackground"-->
+        <!--                    android:clickable="true"-->
+        <!--                    android:contentDescription="@string/logout"-->
+        <!--                    android:focusable="true"-->
+        <!--                    android:onClick="@{()->viewModel.logOut()}"-->
+        <!--                    android:scaleType="centerInside"-->
+        <!--                    android:src="@drawable/logout" />-->
+
+        <!--            </LinearLayout>-->
+
+        <!--&lt;!&ndash;            <FrameLayout&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:visibility="@{user.name == null ? View.VISIBLE : View.GONE }">&ndash;&gt;-->
+
+        <!--            &lt;!&ndash;                <include layout="@layout/layout_placeholder_account" />&ndash;&gt;-->
+        <!--            &lt;!&ndash;            </FrameLayout>&ndash;&gt;-->
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:orientation="vertical"-->
+        <!--                android:visibility="@{user.name == null ? View.GONE : View.VISIBLE }">-->
+
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:orientation="vertical">-->
+
+        <!--                    <TextView-->
+        <!--                        android:id="@+id/account_text"-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:fontFamily="sans-serif-light"-->
+        <!--                        android:padding="@dimen/padding_5dp"-->
+        <!--                        android:paddingStart="@dimen/dimen_padding_20dp"-->
+        <!--                        android:paddingLeft="@dimen/dimen_padding_20dp"-->
+        <!--                        android:paddingEnd="@dimen/dimen_padding_20dp"-->
+        <!--                        android:text="@string/account_text"-->
+        <!--                        android:textColor="@color/white"-->
+        <!--                        android:textSize="17sp"-->
+        <!--                        tools:targetApi="jelly_bean" />-->
+
+        <!--                    <TextView-->
+        <!--                        android:id="@+id/account_details"-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:fontFamily="sans-serif-light"-->
+        <!--                        android:paddingStart="@dimen/dimen_padding_20dp"-->
+        <!--                        android:paddingLeft="@dimen/dimen_padding_20dp"-->
+        <!--                        android:paddingEnd="@dimen/dimen_padding_20dp"-->
+        <!--                        android:text="@{user.bankAccount + ` / ` + user.agency}"-->
+        <!--                        android:textColor="@color/white"-->
+        <!--                        android:textSize="24sp"-->
+        <!--                        android:visibility="@{user.bankAccount != null ? View.VISIBLE: View.GONE}"-->
+        <!--                        tools:targetApi="jelly_bean"-->
+        <!--                        tools:text="2050 / 0123456789" />-->
+        <!--                </LinearLayout>-->
+
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:orientation="vertical"-->
+        <!--                    android:paddingTop="@dimen/dimen_padding_20dp"-->
+        <!--                    android:paddingBottom="@dimen/dimen_padding_20dp">-->
+
+        <!--                    <TextView-->
+        <!--                        android:id="@+id/balance_text"-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:fontFamily="sans-serif-light"-->
+        <!--                        android:padding="@dimen/padding_5dp"-->
+        <!--                        android:paddingStart="@dimen/dimen_padding_20dp"-->
+        <!--                        android:paddingLeft="@dimen/dimen_padding_20dp"-->
+        <!--                        android:paddingEnd="@dimen/dimen_padding_20dp"-->
+        <!--                        android:text="@string/balance_text"-->
+        <!--                        android:textColor="@color/white"-->
+        <!--                        android:textSize="17sp"-->
+        <!--                        tools:targetApi="jelly_bean" />-->
+
+        <!--                    <TextView-->
+        <!--                        android:id="@+id/balance_value"-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:fontFamily="sans-serif-light"-->
+        <!--                        android:paddingStart="@dimen/dimen_padding_20dp"-->
+        <!--                        android:paddingLeft="@dimen/dimen_padding_20dp"-->
+        <!--                        android:paddingEnd="@dimen/dimen_padding_20dp"-->
+        <!--                        android:text="@{`R$ ` + String.valueOf(user.balance)}"-->
+        <!--                        android:textColor="@color/white"-->
+        <!--                        android:textSize="24sp"-->
+        <!--                        tools:targetApi="jelly_bean"-->
+        <!--                        tools:text="RS 1.000,00" />-->
+        <!--                </LinearLayout>-->
+        <!--            </LinearLayout>-->
+        <!--        </LinearLayout>-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/recent_section"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@id/account_section"-->
+        <!--            android:paddingStart="@dimen/dimen_padding_20dp"-->
+        <!--            android:paddingLeft="@dimen/dimen_padding_20dp"-->
+        <!--            android:paddingTop="@dimen/padding_10dp"-->
+        <!--            android:paddingEnd="@dimen/dimen_padding_20dp"-->
+        <!--            android:paddingBottom="@dimen/padding_10dp"-->
+        <!--            android:text="@string/recent"-->
+        <!--            android:textSize="22sp" />-->
+
+        <!--        <androidx.recyclerview.widget.RecyclerView-->
+        <!--            android:id="@+id/statement_rv"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_below="@id/recent_section" />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

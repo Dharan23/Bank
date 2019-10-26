@@ -35,7 +35,7 @@
         <item name="android:divider">@android:color/transparent</item>
         <item name="android:dividerHeight">0.0px</item>
         <item name="android:elevation" tools:targetApi="lollipop">@dimen/dimen_8dp</item>
-        <item name="cardPreventCornerOverlap">false</item>
+
         <item name="android:clipToPadding">false</item>
         <item name="android:clipChildren">false</item>
     </style>

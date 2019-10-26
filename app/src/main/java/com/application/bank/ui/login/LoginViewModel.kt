@@ -22,8 +22,8 @@ class LoginViewModel(
     private val loginRepository: LoginRepository
 ) : BaseViewModel<LoginNavigator>() {
 
-    var userName: String? = ""
-    var password: String? = ""
+    var userName: String = ""
+    var password: String = ""
     var loading: ObservableField<Boolean> = ObservableField(false)
 
     fun onLogin() = viewModelScope.launch {
@@ -33,26 +33,26 @@ class LoginViewModel(
         val navigator = navigator?.get()
         setLoading(true)
 
-        if (isEmailEmpty(userName!!)) {
+        if (isEmailEmpty(userName)) {
             username_empty = true
             navigator?.setUsernameError("Usuário empty")
             setLoading(false)
             return@launch
         }
 
-        if (isPasswordEmpty(password!!)) {
+        if (isPasswordEmpty(password)) {
             password_empty = true
             navigator?.setPasswordError("senha empty")
             setLoading(false)
             return@launch
         }
 
-        if (!username_empty && !isEmailValid(userName!!)) {
+        if (!username_empty && !isEmailValid(userName)) {
             valid = false
             navigator?.setUsernameError("Usuário inválido")
         }
 
-        if (!password_empty && !isPasswordValid(password!!)) {
+        if (!password_empty && !isPasswordValid(password)) {
             valid = false
             navigator?.setPasswordError("senha inválido")
         }
@@ -64,7 +64,7 @@ class LoginViewModel(
         }
 
         try {
-            loginRepository.loginUser(Login(userName!!, password!!)).value.apply {
+            loginRepository.loginUser(Login(userName, password)).value.apply {
                 if (this?.error?.code != 0) {
                     this?.error?.message?.let { navigator?.loginResponse(it) }
                     setLoading(false)
